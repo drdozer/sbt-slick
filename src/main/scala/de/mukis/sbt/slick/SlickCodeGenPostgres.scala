@@ -12,7 +12,7 @@ object SlickCodeGenPostgres extends AutoPlugin {
   override def requires = SlickCodeGenPlugin
 
   override lazy val projectSettings = Seq[Setting[_]](
-    slickDriver := "slick.driver.PostgresDrive",
+    slickDriver := "slick.driver.PostgresDriver",
     slickJDBCDriver := "org.postgresql.Driver",
     slickPort := 5432,
     slickUrl := { database =>
