@@ -25,10 +25,9 @@ object SlickCodeGenPlugin extends AutoPlugin {
       val log = streams.value.log
 
       // place generated files in sbt's managed sources folder
+      val arguments = slickArguments.value
       val outputDir = (sourceManaged in Compile).value.getPath
       val driver = slickDriver.value
-      val jdbc = slickJDBCDriver.value
-      val url = slickUrl.value
       val rootPackage = slickPackage.value
       val dbs = slickDatabases.value
 
@@ -37,9 +36,7 @@ object SlickCodeGenPlugin extends AutoPlugin {
         val fname = (sourceManaged in Compile).value / rootPackage.replaceAll("\\.", "/") / "Tables.scala"
         if (!fname.exists) {
           toError(
-            r.run("slick.codegen.SourceCodeGenerator", cp.files, Array(
-              driver, jdbc, url(None), outputDir, rootPackage
-            ), log)
+            r.run("slick.codegen.SourceCodeGenerator", cp.files, arguments(None), log)
           )
           log.success(s"Using $driver. Output in $outputDir with package $rootPackage")
         }
@@ -52,9 +49,7 @@ object SlickCodeGenPlugin extends AutoPlugin {
           val fname = (sourceManaged in Compile).value / dbPackage.replaceAll("\\.", "/") / "Tables.scala"
           if (!fname.exists) {
             toError(
-              r.run("slick.codegen.SourceCodeGenerator", cp.files, Array(
-                driver, jdbc, url(Some(database)), outputDir, dbPackage
-              ), log)
+              r.run("slick.codegen.SourceCodeGenerator", cp.files, arguments(Some(database)), log)
             )
             log.success(s"Using $driver. Output in $outputDir with package $dbPackage")
           }
