@@ -25,10 +25,10 @@ object SlickCodeGenPostgres extends AutoPlugin {
       val url = slickUrl.value
       val outputDir = (sourceManaged in Compile).value.getPath
       val rootPackage = slickPackage.value
-      val user = slickUser.value map (u => s"user=$u")
-      val pass = slickPassword.value map (p => s"password=$p")
+      val user = slickUser.value getOrElse sys.error("No user supplied")
+      val pass = slickPassword.value getOrElse sys.error("No password supplied")
 
-      Array(driver, jdbc, url(database), outputDir, rootPackage) ++ user ++ pass
+      Array(driver, jdbc, url(database), outputDir, rootPackage, user, pass)
     }
   )
 }
