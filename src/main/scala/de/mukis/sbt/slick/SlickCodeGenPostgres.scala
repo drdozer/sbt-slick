@@ -19,16 +19,6 @@ object SlickCodeGenPostgres extends AutoPlugin {
       val db = database getOrElse ""
       s"jdbc:postgresql://localhost:${slickPort.value}/$db"
     },
-    slickArguments := { database =>
-      val driver = slickDriver.value
-      val jdbc = slickJDBCDriver.value
-      val url = slickUrl.value
-      val outputDir = (sourceManaged in Compile).value.getPath
-      val rootPackage = slickPackage.value
-      val user = slickUser.value getOrElse sys.error("No user supplied")
-      val pass = slickPassword.value getOrElse sys.error("No password supplied")
-
-      Array(driver, jdbc, url(database), outputDir, rootPackage, user, pass)
-    }
+    slickCallForm := CallForm.WithCredentials
   )
 }

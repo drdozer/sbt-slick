@@ -17,14 +17,6 @@ object SlickCodeGenH2 extends AutoPlugin {
     slickUrl := { db =>
       s"jdbc:h2:mem${db.map(":" + _) getOrElse ""}"
     },
-    slickArguments := { database =>
-      val driver = slickDriver.value
-      val jdbc = slickJDBCDriver.value
-      val url = slickUrl.value
-      val outputDir = (sourceManaged in Compile).value.getPath
-      val rootPackage = slickPackage.value
-
-      Array(driver, jdbc, url(database), outputDir, rootPackage)
-    }
+    slickCallForm := CallForm.WithoutCredentials
   )
 }

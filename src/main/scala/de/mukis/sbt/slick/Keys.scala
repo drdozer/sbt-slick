@@ -11,7 +11,6 @@ trait Keys {
    * database name => url
    */
   type MakeUrl = Option[String] => String
-  type MakeArguments = Option[String] => Array[String]
 
   /**
    * database name => package name
@@ -21,7 +20,7 @@ trait Keys {
   val slickDriver = SettingKey[String]("slick-driver", "The slick driver, e.g. 'scala.slick.driver.MySQLDriver'")
   val slickJDBCDriver = SettingKey[String]("slick-jdbc-driver", "The jdbc driver, e.g. 'com.mysql.jdbc.Driver'")
   val slickUrl = TaskKey[MakeUrl]("slick-url", "URL to database, e.g. 'jdbc:mysql://localhost:3306/your-db'")
-  val slickArguments = TaskKey[MakeArguments]("slick-arguments", "Arguments array for database")
+  val slickCallForm = SettingKey[CallForm]("slick-call-form", "The calling form to SourceCodeGenerator, with or without credentials included")
   val slickUser = SettingKey[Option[String]]("slick-user", "User to access database")
   val slickPassword = SettingKey[Option[String]]("slick-password", "Password to access database")
   val slickPort = TaskKey[Int]("slick-port", "Port to access database")

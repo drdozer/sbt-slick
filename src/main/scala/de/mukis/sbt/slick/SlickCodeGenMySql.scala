@@ -24,14 +24,6 @@ object SlickCodeGenMySql extends AutoPlugin {
       val params = if (paramsList.isEmpty) "" else "?" + (paramsList mkString "&")
       s"jdbc:mysql://localhost:${slickPort.value}/$db$params"
     },
-    slickArguments := { database =>
-      val driver = slickDriver.value
-      val jdbc = slickJDBCDriver.value
-      val url = slickUrl.value
-      val outputDir = (sourceManaged in Compile).value.getPath
-      val rootPackage = slickPackage.value
-
-      Array(driver, jdbc, url(database), outputDir, rootPackage)
-    }
+    slickCallForm := CallForm.WithoutCredentials
   )
 }
