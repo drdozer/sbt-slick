@@ -53,6 +53,7 @@ object SlickCodeGenPlugin extends AutoPlugin {
     slickPort := -1,
     slickPackage := "models",
     slickDatabases := Nil,
+    slickHostName := "localhost",
     slickMakeDbPackage := identity,
     slickGenTables := {
       val cp = (dependencyClasspath in Compile).value

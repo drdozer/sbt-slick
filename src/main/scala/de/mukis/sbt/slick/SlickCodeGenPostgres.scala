@@ -17,7 +17,9 @@ object SlickCodeGenPostgres extends AutoPlugin {
     slickPort := 5432,
     slickUrl := { database =>
       val db = database getOrElse ""
-      s"jdbc:postgresql://localhost:${slickPort.value}/$db"
+      val hostName = slickHostName.value
+      val port = slickPort.value
+      s"jdbc:postgresql://$hostName:$port/$db"
     },
     slickCallForm := CallForm.WithCredentials
   )

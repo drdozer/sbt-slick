@@ -23,6 +23,7 @@ trait Keys {
   val slickCallForm = SettingKey[CallForm]("slick-call-form", "The calling form to SourceCodeGenerator, with or without credentials included")
   val slickUser = SettingKey[Option[String]]("slick-user", "User to access database")
   val slickPassword = SettingKey[Option[String]]("slick-password", "Password to access database")
+  val slickHostName = SettingKey[String]("slick-host-name", "Database server host name, defaults to 'localhost'")
   val slickPort = TaskKey[Int]("slick-port", "Port to access database")
   val slickDatabases = SettingKey[Seq[String]]("slick-databases", "databases to generate tables for")
   val slickPackage = SettingKey[String]("slick-package", "Output package for Tables.scala")
